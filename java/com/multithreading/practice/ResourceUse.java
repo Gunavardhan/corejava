@@ -1,6 +1,6 @@
-package com.practice.synchronization;
+package com.multithreading.practice;
 
-public class MyResource {
+public class ResourceUse {
 	String s = "hello";
 	public void method1(){
 		System.out.println("This is method1 : --  " + Thread.currentThread().getName());
@@ -67,11 +67,9 @@ public class MyResource {
 	}
 	
 	public static void main(String[] args) {
-		MyResource resObj1 = new MyResource();
-		MyResource resObj2 = new MyResource();
-		MyOwnThread mt1 = new MyOwnThread(resObj1);
-		mt1.setName("First");
-		mt1.start();
+		ResourceUse resObj1 = new ResourceUse();
+		ResourceUse resObj2 = new ResourceUse();
+		resObj1.method1();
 		MyownThread2 mt2 = new MyownThread2(resObj1);
 		mt2.setName("Second");
 		mt2.start();
@@ -85,19 +83,9 @@ public class MyResource {
 
 }
 
-class MyOwnThread extends Thread{
-	MyResource resource;
-	public MyOwnThread(MyResource resource) {
-		this.resource = resource;
-	}
-	@Override
-	public void run() {
-		resource.method1();
-	}
-}
 class MyownThread2 extends Thread{
-	MyResource resource;
-	public MyownThread2(MyResource resource) {
+	ResourceUse resource;
+	public MyownThread2(ResourceUse resource) {
 		this.resource = resource;
 	}
 	@Override
@@ -106,8 +94,8 @@ class MyownThread2 extends Thread{
 	}
 }
 class MyOwnThread3 extends Thread{
-	MyResource resource;
-	public MyOwnThread3(MyResource resource) {
+	ResourceUse resource;
+	public MyOwnThread3(ResourceUse resource) {
 		this.resource = resource;
 	}
 	@Override
@@ -116,8 +104,8 @@ class MyOwnThread3 extends Thread{
 	}
 }
 class MyownThread4 extends Thread{
-	MyResource resource;
-	public MyownThread4(MyResource resource) {
+	ResourceUse resource;
+	public MyownThread4(ResourceUse resource) {
 		this.resource = resource;
 	}
 	@Override
